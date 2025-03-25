@@ -13,4 +13,10 @@ export default defineConfig({
     }),
     pluginReactLynx(),
   ],
+  source: {
+    entry: {
+      // empty: './src/index.tsx',
+      welcome: './cards/welcome/src/index.tsx',
+    }
+  }
 })
