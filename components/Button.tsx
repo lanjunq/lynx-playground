@@ -4,10 +4,10 @@ import { useState } from 'react'
 interface ButtonProps {
   onTap?: () => void;
   children: React.ReactNode;
-  style?: React.CSSProperties;
+  client_style?: React.CSSProperties;
 }
 
-export function Button({ onTap, children, style }: ButtonProps) {
+export function Button({ onTap, children, client_style }: ButtonProps) {
   const [active, setActive] = useState(false);
   
   const handleClick = () => {
@@ -21,7 +21,8 @@ export function Button({ onTap, children, style }: ButtonProps) {
   };
   
   // 按钮样式
-  const buttonStyle = {
+  const buttonStyle: React.CSSProperties = {
+    // 默认样式
     padding: '12px',
     borderRadius: '8px',
     backgroundColor: active ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 0.2)',
@@ -29,7 +30,8 @@ export function Button({ onTap, children, style }: ButtonProps) {
     transition: 'all 0.15s ease',
     transform: active ? 'scale(0.95)' : 'scale(1)',
     boxShadow: active ? '0 0 10px rgba(255, 255, 255, 0.5)' : 'none',
-    ...style // 合并自定义样式
+    // 合并自定义样式
+    ...client_style,
   };
 
   return (

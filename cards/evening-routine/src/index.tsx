@@ -1,8 +1,8 @@
 import { root } from '@lynx-js/react'
 
-import { Routine } from './Routine.jsx'
+import { EveningRoutine } from './EveningRoutine.jsx'
 
-root.render(<Routine />)
+root.render(<EveningRoutine />)
 
 if (import.meta.webpackHot) {
   import.meta.webpackHot.accept()

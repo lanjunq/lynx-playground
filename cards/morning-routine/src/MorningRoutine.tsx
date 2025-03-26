@@ -1,9 +1,9 @@
-// import './Routine.css';
+// import './MorningRoutine.css';
 
 import { Button } from '../../../components/Button.jsx';
 import { DataManager } from '../../../data/DataManager.js';
 
-export function Routine() {
+export function MorningRoutine() {
   const routine_steps = DataManager.getMorningRoutine();
   return (
     <view
