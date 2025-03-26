@@ -1,13 +1,13 @@
 import { useState } from 'react'
 
 // 按钮组件接口定义
-export interface ButtonItemProps {
-  name: string;
-  text: string;
-  onTap: (name: string) => void;
+interface ButtonProps {
+  onTap?: () => void;
+  children: React.ReactNode;
+  style?: React.CSSProperties;
 }
 
-export function Button({ name, text: text, onTap }: ButtonItemProps) {
+export function Button({ onTap, children, style }: ButtonProps) {
   const [active, setActive] = useState(false);
   
   const handleClick = () => {
@@ -17,7 +17,7 @@ export function Button({ name, text: text, onTap }: ButtonItemProps) {
       setActive(false);
     }, 100);
     // Call tap handler
-    onTap(name);
+    onTap?.();
   };
   
   // 按钮样式
@@ -28,12 +28,13 @@ export function Button({ name, text: text, onTap }: ButtonItemProps) {
     border: '1px solid rgba(255, 255, 255, 0.3)',
     transition: 'all 0.15s ease',
     transform: active ? 'scale(0.95)' : 'scale(1)',
-    boxShadow: active ? '0 0 10px rgba(255, 255, 255, 0.5)' : 'none'
+    boxShadow: active ? '0 0 10px rgba(255, 255, 255, 0.5)' : 'none',
+    ...style // 合并自定义样式
   };
-  
+
   return (
     <view catchtap={handleClick} style={buttonStyle}>
-      <text style={{ color: '#fff', fontWeight: 'bold' }}>{text}</text>
+      {children}
     </view>
   );
 } 
