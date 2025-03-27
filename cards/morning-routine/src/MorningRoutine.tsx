@@ -1,10 +1,25 @@
 // import './MorningRoutine.css';
+import { useState } from 'react';
 
 import { Button } from '../../../components/Button.jsx';
 import { DataManager } from '../../../data/DataManager.js';
 
 export function MorningRoutine() {
   const routine_steps = DataManager.getMorningRoutine();
+  const [isRead, setIsRead] = useState<boolean[]>(new Array(routine_steps.length).fill(false));
+
+  const markAsRead = (index: number) => {
+    const newIsRead = [...isRead];
+    newIsRead[index] = true;
+    setIsRead(newIsRead);
+  };
+
+  const markAsUnread = (index: number) => {
+    const newIsRead = [...isRead];
+    newIsRead[index] = false;
+    setIsRead(newIsRead);
+  };
+
   return (
       <scroll-view style={{ height: '100%' }} scroll-orientation='vertical'>
         <view
@@ -13,21 +28,35 @@ export function MorningRoutine() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            // height: '100%',
+            padding: '20px',
+            paddingTop: '40px',
+            paddingBottom: '40px',
           }}
         >
-          <text style={{ fontSize: '48px', fontWeight: 'bold' }}>Routine</text>
-          <text style={{ fontSize: '38px' }}>Complete your morning routine ☀️</text>
+          <text style={{ fontSize: '48px', fontWeight: 'bold', marginBottom: '20px' }}>Routine</text>
+          <text style={{ fontSize: '38px', marginBottom: '40px' }}>Complete your morning routine ☀️</text>
           <view
             style={{
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'left',
               margin: '2em',
+              width: '100%',
+              padding: '0 20px',
             }}
           >
             {routine_steps.map((item, index) => (
-              <text key={index} style={{ fontSize: '40px', marginBottom: '8px' }}>
+              <text 
+                key={index} 
+                style={{ 
+                  fontSize: '40px', 
+                  marginBottom: '16px',
+                  color: isRead[index] ? '#999' : '#FFFFFF',
+                  textDecoration: isRead[index] ? 'line-through' : 'none'
+                }}
+                catchtap={() => markAsRead(index)}
+                catchlongpress={() => markAsUnread(index)}
+              >
                 {index + 1}. {item}
               </text>
             ))}
@@ -35,7 +64,7 @@ export function MorningRoutine() {
 
           {/* TODO: 增加一个 text input，写下今天的感想 */}
 
-          <Button style={{ backgroundColor: 'lightgreen' }} onTap={() => {}}>
+          <Button style={{ backgroundColor: 'lightgreen', marginTop: '20px' }} onTap={() => {}}>
             <text style={{ color: 'black' }}>完成早上 Routine! ✅</text>
           </Button>
         </view>
