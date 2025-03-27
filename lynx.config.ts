@@ -16,8 +16,9 @@ export default defineConfig({
   source: {
     entry: {
       // empty: './src/index.tsx',
-      evening_routine: './cards/evening-routine/src/index.tsx',
+      learn_scroll_view: './cards/learn-scroll-view/index.tsx',
       morning_routine: './cards/morning-routine/src/index.tsx',
+      evening_routine: './cards/evening-routine/src/index.tsx',
       welcome: './cards/welcome/src/index.tsx',
     },
   },

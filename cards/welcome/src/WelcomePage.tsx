@@ -29,7 +29,13 @@ export function WelcomePage() {
   };
 
   return (
-    <view className="App">
+    <scroll-view
+      className="App"
+      style={{
+        height: '100%',
+        width: '100%',
+      }}
+    >
       <view className="Background" />
       <view className="Banner">
         <view className="Logo">
@@ -70,6 +76,6 @@ export function WelcomePage() {
           </Button>
         </view>
       </view>
-    </view>
+    </scroll-view>
   );
 }
