@@ -1,42 +1,49 @@
-import { useState } from 'react'
+import React from 'react';
+import { useTheme, ThemeMode } from '../contexts/ThemeContext.jsx';
 
 // 按钮组件接口定义
 interface ButtonProps {
-  onTap?: () => void;
   children: React.ReactNode;
-  client_style?: React.CSSProperties;
+  onClick?: () => void;
+  style?: React.CSSProperties;
 }
 
-export function Button({ onTap, children, client_style }: ButtonProps) {
-  const [active, setActive] = useState(false);
+export const Button = ({ children, onClick, style = {} }: ButtonProps) => {
+  const [active, setActive] = React.useState(false);
+  const { theme } = useTheme();
+  const isDarkMode: Boolean = theme === ThemeMode.Dark;
   
-  const handleClick = () => {
-    // Animation
-    setActive(true);
-    setTimeout(() => {
-      setActive(false);
-    }, 100);
-    // Call tap handler
-    onTap?.();
-  };
-  
-  // 按钮样式
   const buttonStyle: React.CSSProperties = {
     // 默认样式
-    padding: '12px',
-    borderRadius: '8px',
-    backgroundColor: active ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 0.2)',
-    border: '1px solid rgba(255, 255, 255, 0.3)',
+    padding: '1em',
+    borderRadius: '0.5em',
+    backgroundColor: isDarkMode 
+      ? (active ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)')
+      : (active ? 'rgba(0, 0, 0, 0.1)' : 'rgba(0, 0, 0, 0.05)'),
+    border: isDarkMode 
+      ? '1px solid rgba(255, 255, 255, 0.2)'
+      : '1px solid rgba(0, 0, 0, 0.1)',
+    color: isDarkMode ? 'rgba(255, 255, 255, 0.9)' : '#333',
     transition: 'all 0.15s ease',
     transform: active ? 'scale(0.95)' : 'scale(1)',
-    boxShadow: active ? '0 0 10px rgba(255, 255, 255, 0.5)' : 'none',
+    boxShadow: active 
+      ? (isDarkMode ? '0 0 10px rgba(255, 255, 255, 0.3)' : '0 0 10px rgba(0, 0, 0, 0.2)')
+      : 'none',
     // 合并自定义样式
-    ...client_style,
+    ...style,
   };
 
   return (
-    <view catchtap={handleClick} style={buttonStyle}>
+    <view
+      style={buttonStyle}
+      bindtouchstart={() => setActive(true)}
+      bindtouchcancel={() => setActive(false)}
+      bindtouchend={() => setActive(false)}
+      onClick={onClick}
+    >
       {children}
     </view>
   );
-} 
+};
+
+export default Button; 

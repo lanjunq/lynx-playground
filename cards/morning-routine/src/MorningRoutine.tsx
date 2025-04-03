@@ -1,6 +1,6 @@
-// import './MorningRoutine.css';
+import './MorningRoutine.css';
 import { useState } from 'react';
-
+import { ThemeProvider } from '../../../contexts/ThemeContext.jsx';
 import { Button } from '../../../components/Button.jsx';
 import { DataManager } from '../../../data/DataManager.js';
 
@@ -21,39 +21,16 @@ export function MorningRoutine() {
   };
 
   return (
-      <scroll-view style={{ height: '100%' }} scroll-orientation='vertical'>
-        <view
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '20px',
-            paddingTop: '40px',
-            paddingBottom: '40px',
-          }}
-        >
-          <text style={{ fontSize: '48px', fontWeight: 'bold', marginBottom: '20px' }}>Routine</text>
-          <text style={{ fontSize: '38px', marginBottom: '40px' }}>Complete your morning routine ☀️</text>
-          <view
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'left',
-              margin: '2em',
-              width: '100%',
-              padding: '0 20px',
-            }}
-          >
+    <ThemeProvider>
+      <scroll-view className="MorningRoutine" scroll-orientation="vertical">
+        <view className="container">
+          <text className="title">Routine</text>
+          <text className="subtitle">Complete your morning routine ☀️</text>
+          <view className="steps">
             {routine_steps.map((item, index) => (
-              <text 
-                key={index} 
-                style={{ 
-                  fontSize: '40px', 
-                  marginBottom: '16px',
-                  color: isRead[index] ? '#999' : '#FFFFFF',
-                  textDecoration: isRead[index] ? 'line-through' : 'none'
-                }}
+              <text
+                key={index}
+                className={`step ${isRead[index] ? 'completed' : ''}`}
                 catchtap={() => markAsRead(index)}
                 catchlongpress={() => markAsUnread(index)}
               >
@@ -64,10 +41,11 @@ export function MorningRoutine() {
 
           {/* TODO: 增加一个 text input，写下今天的感想 */}
 
-          <Button style={{ backgroundColor: 'lightgreen', marginTop: '20px' }} onTap={() => {}}>
-            <text style={{ color: 'black' }}>完成早上 Routine! ✅</text>
+          <Button style={{ marginTop: '20px', backgroundColor: 'var(--color-light-primary)' }}>
+            <text style={{ color: 'var(--color-light-text)' }}>完成早上 Routine! ✅</text>
           </Button>
         </view>
       </scroll-view>
+    </ThemeProvider>
   );
 }

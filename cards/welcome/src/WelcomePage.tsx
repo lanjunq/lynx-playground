@@ -1,5 +1,6 @@
 import './WelcomePage.css';
 import { useState, useEffect } from 'react';
+import { ThemeProvider } from '../../../contexts/ThemeContext.jsx';
 import { Button } from '../../../components/Button.jsx';
 import { DataManager } from '../../../data/DataManager.js';
 
@@ -29,53 +30,55 @@ export function WelcomePage() {
   };
 
   return (
-    <scroll-view
-      className="App"
-      style={{
-        height: '100%',
-        width: '100%',
-      }}
-    >
-      <view className="Background" />
-      <view className="Banner">
-        <view className="Logo">
-          <image
-            className="Logo--lynx"
-            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDUiIGZpbGw9IiNGRkZGRkYiLz4KICA8cGF0aCBkPSJNMzMgMzZMNTAgNjVMNjcgMzYiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSI1Ii8+Cjwvc3ZnPg=="
-          />
+    <ThemeProvider>
+      <scroll-view
+        className="App"
+        style={{
+          height: '100%',
+          width: '100%',
+        }}
+      >
+        <view className="Background" />
+        <view className="Banner">
+          <view className="Logo">
+            <image
+              className="Logo--lynx"
+              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDUiIGZpbGw9IiNGRkZGRkYiLz4KICA8cGF0aCBkPSJNMzMgMzZMNTAgNjVMNjcgMzYiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSI1Ii8+Cjwvc3ZnPg=="
+            />
+          </view>
+
+          <view className="Content">
+            <text className="Title">Hi!👋</text>
+            <text className="Subtitle">{formattedDate}</text>
+            <text className="Subtitle">{dayOfWeek}</text>
+            <text className="Quote">"{quote}"</text>
+          </view>
+
+          <view
+            style={{
+              marginTop: '30px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '15px',
+              width: '80%',
+              maxWidth: '300px',
+            }}
+          >
+            <Button onClick={() => jumpToPage('Morning Routine')}>
+              <text>Morning Routine</text>
+            </Button>
+
+            <Button onClick={() => jumpToPage('Plan for the day')}>
+              <text>Plan for the day</text>
+            </Button>
+
+            <Button onClick={() => jumpToPage('Evening Review')}>
+              <text>Evening Review</text>
+            </Button>
+          </view>
         </view>
-
-        <view className="Content">
-          <text className="Title">Hi!👋</text>
-          <text className="Subtitle">
-            {formattedDate} {dayOfWeek}
-          </text>
-          <text className="Description">{quote}</text>
-        </view>
-
-        <view
-          style={{
-            marginTop: '30px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '15px',
-            width: '80%',
-            maxWidth: '300px',
-          }}
-        >
-          <Button onTap={() => jumpToPage('Morning Routine')}>
-            Morning Routine
-          </Button>
-
-          <Button onTap={() => jumpToPage('Plan for the day')}>
-            Plan for the day
-          </Button>
-
-          <Button onTap={() => jumpToPage('Evening Review')}>
-            Evening Review
-          </Button>
-        </view>
-      </view>
-    </scroll-view>
+      </scroll-view>
+    </ThemeProvider>
+    // <text>Welcome Page</text>
   );
 }

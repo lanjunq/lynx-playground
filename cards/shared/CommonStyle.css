@@ -1,0 +1,128 @@
+:root {
+  /* Default theme */
+  background-color: #000;
+  color: #fff;
+
+  /* Light theme colors */
+  --color-light-background: #ffffff;
+  --color-light-text: #333333;
+  --color-light-primary: #4a90e2;
+  --color-light-secondary: #f5f5f5;
+  
+  /* Dark theme colors */
+  --color-dark-background: #1a1a1a;
+  --color-dark-text: #ffffff;
+  --color-dark-primary: #64b5f6;
+  --color-dark-secondary: #2d2d2d;
+
+  /* Common colors */
+  --color-text: #fff;
+  --color-text-secondary: rgba(255, 255, 255, 0.85);
+  --color-text-hint: rgba(255, 255, 255, 0.65);
+}
+
+/* Background gradient */
+.Background {
+  position: fixed;
+  background: radial-gradient(
+    71.43% 62.3% at 46.43% 36.43%,
+    rgba(18, 229, 229, 0) 15%,
+    rgba(239, 155, 255, 0.3) 56.35%,
+    #ff6448 100%
+  );
+  box-shadow: 0px 12.93px 28.74px 0px #ffd28db2 inset;
+  border-radius: 50%;
+  width: 200vw;
+  height: 200vw;
+  top: -60vw;
+  left: -14.27vw;
+  transform: rotate(15.25deg);
+  z-index: -1;
+}
+
+/* Common layout */
+.App {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Banner {
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.Content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Common typography */
+.Title {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 1em auto 2rem;
+  color: var(--color-text);
+}
+
+.Subtitle {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0.2em auto 0.4rem;
+  color: var(--color-text);
+}
+
+.Quote {
+  font-size: 20px;
+  font-style: italic;
+  color: var(--color-text-secondary);
+  margin: 15rpx;
+}
+
+.Hint {
+  font-size: 12px;
+  margin: 5px;
+  color: var(--color-text-hint);
+}
+
+/* Common animations */
+@keyframes Logo--spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes Logo--shake {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Theme classes */
+.theme-light {
+  background-color: var(--color-light-background);
+  color: var(--color-light-text);
+}
+
+.theme-dark {
+  background-color: var(--color-dark-background);
+  color: var(--color-dark-text);
+}
