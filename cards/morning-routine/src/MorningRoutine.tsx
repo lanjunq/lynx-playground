@@ -1,6 +1,6 @@
 import './MorningRoutine.css';
 import { useState } from 'react';
-import { ThemeProvider } from '../../../contexts/ThemeContext.jsx';
+import { ThemeContext, isSystemInDarkMode } from '../../../contexts/ThemeContext.jsx';
 import { Button } from '../../../components/Button.jsx';
 import { DataManager } from '../../../data/DataManager.js';
 
@@ -21,7 +21,7 @@ export function MorningRoutine() {
   };
 
   return (
-    <ThemeProvider>
+    <ThemeContext.Provider value={isSystemInDarkMode()}>
       <scroll-view className="MorningRoutine" scroll-orientation="vertical">
         <view className="container">
           <text className="title">Routine</text>
@@ -46,6 +46,6 @@ export function MorningRoutine() {
           </Button>
         </view>
       </scroll-view>
-    </ThemeProvider>
+    </ThemeContext.Provider>
   );
 }

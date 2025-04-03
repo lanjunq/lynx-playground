@@ -1,19 +1,20 @@
-import React from 'react';
-import { useTheme, ThemeMode } from '../contexts/ThemeContext.jsx';
+import React  from 'react';
+import { useContext } from 'react';
+import { ThemeContext } from '../contexts/ThemeContext.jsx';
+import type { CSSProperties } from '@lynx-js/types';
 
 // 按钮组件接口定义
 interface ButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export const Button = ({ children, onClick, style = {} }: ButtonProps) => {
   const [active, setActive] = React.useState(false);
-  const { theme } = useTheme();
-  const isDarkMode: Boolean = theme === ThemeMode.Dark;
-  
-  const buttonStyle: React.CSSProperties = {
+  const isDarkMode = useContext(ThemeContext);
+
+  const buttonStyle: CSSProperties = {
     // 默认样式
     padding: '1em',
     borderRadius: '0.5em',
@@ -39,7 +40,7 @@ export const Button = ({ children, onClick, style = {} }: ButtonProps) => {
       bindtouchstart={() => setActive(true)}
       bindtouchcancel={() => setActive(false)}
       bindtouchend={() => setActive(false)}
-      onClick={onClick}
+      catchtap={onClick}
     >
       {children}
     </view>

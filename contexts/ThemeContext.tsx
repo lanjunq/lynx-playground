@@ -1,25 +1,8 @@
-import React, { createContext, useContext } from 'react';
+import { createContext } from 'react';
 
-export enum ThemeMode {
-  Light = 'light',
-  Dark = 'dark',
-}
-
-interface ThemeContextType {
-  theme: ThemeMode;
-}
-
-const ThemeContext = createContext<ThemeContextType>({ theme: ThemeMode.Light });
-
-const getSystemThemeMode = () => {
+export const isSystemInDarkMode = () => {
   // TODO: 获取系统主题
-  return ThemeMode.Dark;
+  return true;
 };
 
-export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <ThemeContext.Provider value={{ theme: getSystemThemeMode() }}>{children}</ThemeContext.Provider>;
-};
-
-export const useTheme = () => {
-  return useContext(ThemeContext);
-};
+export const ThemeContext = createContext<Boolean>(isSystemInDarkMode());

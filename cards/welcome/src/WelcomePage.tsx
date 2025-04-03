@@ -1,6 +1,6 @@
 import './WelcomePage.css';
 import { useState, useEffect } from 'react';
-import { ThemeProvider } from '../../../contexts/ThemeContext.jsx';
+import { ThemeContext, isSystemInDarkMode } from '../../../contexts/ThemeContext.jsx';
 import { Button } from '../../../components/Button.jsx';
 import { DataManager } from '../../../data/DataManager.js';
 
@@ -30,7 +30,7 @@ export function WelcomePage() {
   };
 
   return (
-    <ThemeProvider>
+    <ThemeContext.Provider value={isSystemInDarkMode()}>
       <scroll-view
         className="App"
         style={{
@@ -78,7 +78,6 @@ export function WelcomePage() {
           </view>
         </view>
       </scroll-view>
-    </ThemeProvider>
-    // <text>Welcome Page</text>
+    </ThemeContext.Provider>
   );
 }
