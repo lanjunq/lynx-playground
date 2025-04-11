@@ -1,28 +1,2 @@
 /* Welcome Page specific styles */
 @import url('../../shared/CommonStyle.css');
-
-/* Logo specific styles */
-.Logo {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 8px;
-}
-
-.Logo--react {
-  width: 100px;
-  height: 100px;
-  animation: Logo--spin infinite 20s linear;
-}
-
-.Logo--lynx {
-  width: 100px;
-  height: 100px;
-  animation: Logo--shake infinite 0.5s ease;
-}
-
-/* Arrow specific styles */
-.Arrow {
-  width: 24px;
-  height: 24px;
-} 

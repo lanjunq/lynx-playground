@@ -30,6 +30,10 @@ export const Button = ({ children, onClick, style = {} }: ButtonProps) => {
     boxShadow: active 
       ? (isDarkMode ? '0 0 10px rgba(255, 255, 255, 0.3)' : '0 0 10px rgba(0, 0, 0, 0.2)')
       : 'none',
+    // 添加居中对齐的样式
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     // 合并自定义样式
     ...style,
   };
