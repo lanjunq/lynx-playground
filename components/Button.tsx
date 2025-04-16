@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import { useContext } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext.jsx';
 import type { CSSProperties } from '@lynx-js/types';
@@ -18,18 +18,18 @@ export const Button = ({ children, onClick, style = {} }: ButtonProps) => {
     // 默认样式
     padding: '1em',
     borderRadius: '0.5em',
-    backgroundColor: isDarkMode 
-      ? (active ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)')
-      : (active ? 'rgba(0, 0, 0, 0.1)' : 'rgba(0, 0, 0, 0.05)'),
-    border: isDarkMode 
-      ? '1px solid rgba(255, 255, 255, 0.2)'
-      : '1px solid rgba(0, 0, 0, 0.1)',
+    backgroundColor: isDarkMode
+      ? active
+        ? 'rgba(255, 255, 255, 0.2)'
+        : 'rgba(255, 255, 255, 0.1)'
+      : active
+        ? 'rgba(0, 0, 0, 0.1)'
+        : 'rgba(0, 0, 0, 0.05)',
+    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(0, 0, 0, 0.1)',
     color: isDarkMode ? 'rgba(255, 255, 255, 0.9)' : '#333',
     transition: 'all 0.15s ease',
     transform: active ? 'scale(0.95)' : 'scale(1)',
-    boxShadow: active 
-      ? (isDarkMode ? '0 0 10px rgba(255, 255, 255, 0.3)' : '0 0 10px rgba(0, 0, 0, 0.2)')
-      : 'none',
+    boxShadow: active ? (isDarkMode ? '0 0 10px rgba(255, 255, 255, 0.3)' : '0 0 10px rgba(0, 0, 0, 0.2)') : 'none',
     // 添加居中对齐的样式
     display: 'flex',
     justifyContent: 'center',
@@ -40,6 +40,7 @@ export const Button = ({ children, onClick, style = {} }: ButtonProps) => {
 
   return (
     <view
+      className="Button"
       style={buttonStyle}
       bindtouchstart={() => setActive(true)}
       bindtouchcancel={() => setActive(false)}
@@ -51,4 +52,4 @@ export const Button = ({ children, onClick, style = {} }: ButtonProps) => {
   );
 };
 
-export default Button; 
+export default Button;

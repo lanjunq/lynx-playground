@@ -1,4 +1,5 @@
 import './MorningRoutine.css';
+
 import { useState } from 'react';
 import { ThemeContext, isSystemInDarkMode } from '../../../contexts/ThemeContext.jsx';
 import { Button } from '../../../components/Button.jsx';
@@ -6,33 +7,27 @@ import { DataManager } from '../../../data/DataManager.js';
 
 export function MorningRoutine() {
   const routine_steps = DataManager.getMorningRoutine();
-  const [isRead, setIsRead] = useState<boolean[]>(new Array(routine_steps.length).fill(false));
+  const [isStepCompleted, setIsStepCompleted] = useState<boolean[]>(new Array(routine_steps.length).fill(false));
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
-  const markAsRead = (index: number) => {
-    const newIsRead = [...isRead];
-    newIsRead[index] = true;
-    setIsRead(newIsRead);
-  };
-
-  const markAsUnread = (index: number) => {
-    const newIsRead = [...isRead];
-    newIsRead[index] = false;
-    setIsRead(newIsRead);
+  const toggleMarkAsCompleted = (index: number) => {
+    const newIsStepCompleted = [...isStepCompleted];
+    newIsStepCompleted[index] = !newIsStepCompleted[index];
+    setIsStepCompleted(newIsStepCompleted);
   };
 
   return (
     <ThemeContext.Provider value={isSystemInDarkMode()}>
       <scroll-view className="MorningRoutine" scroll-orientation="vertical">
         <view className="container">
-          <text className="title">Routine</text>
-          <text className="subtitle">Complete your morning routine ☀️</text>
-          <view className="steps">
+          <text className="Title">MorningRoutine ☀️</text>
+          {/* <text className="Subtitle"></text> */}
+          <view className="routine-steps">
             {routine_steps.map((item, index) => (
               <text
                 key={index}
-                className={`step ${isRead[index] ? 'completed' : ''}`}
-                catchtap={() => markAsRead(index)}
-                catchlongpress={() => markAsUnread(index)}
+                className={`routine-step ${isStepCompleted[index] ? 'read' : 'unread'}`}
+                catchtap={() => toggleMarkAsCompleted(index)}
               >
                 {index + 1}. {item}
               </text>
@@ -41,9 +36,18 @@ export function MorningRoutine() {
 
           {/* TODO: 增加一个 text input，写下今天的感想 */}
 
-          <Button style={{ marginTop: '20px', backgroundColor: 'var(--color-light-primary)' }}>
-            <text style={{ color: 'var(--color-light-text)' }}>完成早上 Routine! ✅</text>
+          <Button style={{ backgroundColor: isCompleted ? 'darkgreen' : 'gray' }} onClick={() => setIsCompleted(true)}>
+            {!isCompleted ? (
+              <text>标记完成 Routine ✅</text>
+            ) : (
+              <view style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <text>恭喜你已经完成 Routine 🎉</text>
+                <text>回到主页吧!</text>
+              </view>
+            )}
           </Button>
+
+          {/* TODO: 当用户点击完成 Routine 后，播放一个恭喜动画 */}
         </view>
       </scroll-view>
     </ThemeContext.Provider>
